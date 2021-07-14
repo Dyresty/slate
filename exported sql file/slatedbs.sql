@@ -3,11 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2021 at 03:34 AM
+-- Generation Time: Jul 14, 2021 at 09:00 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -25,30 +24,11 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sub-teach`
---
-
-CREATE TABLE `sub-teach` (
-  `SubID` varchar(15) NOT NULL,
-  `TeachID` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- RELATIONSHIPS FOR TABLE `sub-teach`:
---   `SubID`
---       `subjects` -> `SubID`
---   `TeachID`
---       `teachers` -> `TeachID`
---
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `subjects`
 --
 
 CREATE TABLE `subjects` (
-  `SubName` varchar(20) NOT NULL,
+  `SubName` varchar(50) NOT NULL,
   `SubID` varchar(15) NOT NULL,
   `HoursPerWeek` smallint(6) NOT NULL,
   `Department` varchar(4) NOT NULL,
@@ -56,8 +36,44 @@ CREATE TABLE `subjects` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- RELATIONSHIPS FOR TABLE `subjects`:
+-- Dumping data for table `subjects`
 --
+
+INSERT INTO `subjects` (`SubName`, `SubID`, `HoursPerWeek`, `Department`, `Semester`) VALUES
+('Data Base Management Systems', '18CS43', 3, 'CSE', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subteach`
+--
+
+CREATE TABLE `subteach` (
+  `SubID` varchar(15) NOT NULL,
+  `TeachID` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `subteach`
+--
+
+INSERT INTO `subteach` (`SubID`, `TeachID`) VALUES
+('18CS43', 'CS001');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teacherallo`
+--
+
+CREATE TABLE `teacherallo` (
+  `TeachID` varchar(20) NOT NULL,
+  `SubID` varchar(15) NOT NULL,
+  `Department` varchar(4) NOT NULL,
+  `Sem` int(11) NOT NULL,
+  `Section` varchar(1) NOT NULL,
+  `Batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -72,8 +88,11 @@ CREATE TABLE `teachers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- RELATIONSHIPS FOR TABLE `teachers`:
+-- Dumping data for table `teachers`
 --
+
+INSERT INTO `teachers` (`TeachName`, `TeachID`, `Department`) VALUES
+('Mamatha Bai G', 'CS001', 'CSE');
 
 -- --------------------------------------------------------
 
@@ -88,33 +107,33 @@ CREATE TABLE `timeslots` (
   `Day` int(11) NOT NULL,
   `Department` varchar(4) NOT NULL,
   `Semester` int(11) NOT NULL,
-  `Section` varchar(1) NOT NULL
+  `Section` varchar(1) NOT NULL,
+  `Batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- RELATIONSHIPS FOR TABLE `timeslots`:
---   `SubID`
---       `subjects` -> `SubID`
---   `TeachID`
---       `teachers` -> `TeachID`
---
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `sub-teach`
---
-ALTER TABLE `sub-teach`
-  ADD KEY `SubID` (`SubID`),
-  ADD KEY `TeachID` (`TeachID`);
-
---
 -- Indexes for table `subjects`
 --
 ALTER TABLE `subjects`
   ADD PRIMARY KEY (`SubID`);
+
+--
+-- Indexes for table `subteach`
+--
+ALTER TABLE `subteach`
+  ADD KEY `SubID` (`SubID`),
+  ADD KEY `TeachID` (`TeachID`);
+
+--
+-- Indexes for table `teacherallo`
+--
+ALTER TABLE `teacherallo`
+  ADD KEY `SubID` (`SubID`),
+  ADD KEY `TeachID` (`TeachID`);
 
 --
 -- Indexes for table `teachers`
@@ -134,11 +153,18 @@ ALTER TABLE `timeslots`
 --
 
 --
--- Constraints for table `sub-teach`
+-- Constraints for table `subteach`
 --
-ALTER TABLE `sub-teach`
-  ADD CONSTRAINT `sub-teach_ibfk_1` FOREIGN KEY (`SubID`) REFERENCES `subjects` (`SubID`),
-  ADD CONSTRAINT `sub-teach_ibfk_2` FOREIGN KEY (`TeachID`) REFERENCES `teachers` (`TeachID`);
+ALTER TABLE `subteach`
+  ADD CONSTRAINT `subteach_ibfk_1` FOREIGN KEY (`SubID`) REFERENCES `subjects` (`SubID`),
+  ADD CONSTRAINT `subteach_ibfk_2` FOREIGN KEY (`TeachID`) REFERENCES `teachers` (`TeachID`);
+
+--
+-- Constraints for table `teacherallo`
+--
+ALTER TABLE `teacherallo`
+  ADD CONSTRAINT `teacherallo_ibfk_1` FOREIGN KEY (`SubID`) REFERENCES `subjects` (`SubID`),
+  ADD CONSTRAINT `teacherallo_ibfk_2` FOREIGN KEY (`TeachID`) REFERENCES `teachers` (`TeachID`);
 
 --
 -- Constraints for table `timeslots`
@@ -146,7 +172,6 @@ ALTER TABLE `sub-teach`
 ALTER TABLE `timeslots`
   ADD CONSTRAINT `timeslots_ibfk_1` FOREIGN KEY (`SubID`) REFERENCES `subjects` (`SubID`),
   ADD CONSTRAINT `timeslots_ibfk_2` FOREIGN KEY (`TeachID`) REFERENCES `teachers` (`TeachID`);
-SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
