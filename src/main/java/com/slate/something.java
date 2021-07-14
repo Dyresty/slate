@@ -27,8 +27,6 @@ throws ServletException,IOException
 			Connection con= DatabaseConnection.initializeDatabase(); //static method to connect database
 			System.out.println("connected");  
 	        out.println("<h1>Something</h1>");
-	        if(name.equals("rahul"))
-	        	out.println("You are gay bro");
 	        //query testing
 //	        String sql ="select * from profdeets where email_ID='"+a+"'"; //a is the email we are looking for
 //	        Statement statement=con.createStatement();
