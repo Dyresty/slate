@@ -10,5 +10,12 @@
   	<servlet-name>something</servlet-name>
  	 <url-pattern>/something</url-pattern>
   </servlet-mapping>
-  
+    <servlet>
+  		<servlet-name>Allo</servlet-name>
+  		<servlet-class>com.slate.AlloServ</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Allo</servlet-name>
+ 	 <url-pattern>/Allo</url-pattern>
+  </servlet-mapping>
 </web-app>
