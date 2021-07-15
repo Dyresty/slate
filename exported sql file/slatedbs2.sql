@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2021 at 09:00 PM
+-- Generation Time: Jul 15, 2021 at 09:28 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `slatedbs`
+-- Database: `slatedbs2`
 --
 
 -- --------------------------------------------------------
@@ -40,7 +40,17 @@ CREATE TABLE `subjects` (
 --
 
 INSERT INTO `subjects` (`SubName`, `SubID`, `HoursPerWeek`, `Department`, `Semester`) VALUES
-('Data Base Management Systems', '18CS43', 3, 'CSE', 4);
+('Design and Analysis of Algorithms', '18CS42', 3, 'CSE', 4),
+('Data Base Management Systems', '18CS43', 3, 'CSE', 4),
+('Operating System', '18CS44', 4, 'CSE', 4),
+('Application Development Using Java', '18CS45', 4, 'CSE', 4),
+('Introduction to Embedded Systems', '18CSE461', 3, 'CSE', 4),
+('Introduction to Web Application Development', '18CSE462', 3, 'CSE', 4),
+('Unix System Programming', '18CSE463', 3, 'CSE', 4),
+('Introduction to Image Processing', '18CSE464', 3, 'CSE', 4),
+('DBMS Lab', '18CSL47', 2, 'CSE', 4),
+('Design and Analysis of Algorithms Lab', '18CSL48', 2, 'CSE', 4),
+('Engineering Mathematics - IV', '18MAT41', 5, 'Math', 4);
 
 -- --------------------------------------------------------
 
@@ -58,7 +68,36 @@ CREATE TABLE `subteach` (
 --
 
 INSERT INTO `subteach` (`SubID`, `TeachID`) VALUES
-('18CS43', 'CS001');
+('18CS43', 'CS001'),
+('18CS42', 'CS008'),
+('18CSL47', 'CS001'),
+('18CSL47', 'CS014'),
+('18CSL48', 'CS008'),
+('18MAT41', 'MAT009'),
+('18CSE461', 'CS016'),
+('18CSE464', 'CS023'),
+('18CSE462', 'CS018'),
+('18CS44', 'CS011'),
+('18CSE463', 'CS019'),
+('18CS42', 'CS024'),
+('18CS43', 'CS025'),
+('18CS44', 'CS027'),
+('18CS45', 'CS028'),
+('18CSL47', 'CS018'),
+('18CSL47', 'CS027'),
+('18CSL47', 'CS029'),
+('18CSE462', 'CS030'),
+('18MAT41', 'CS032'),
+('18CS42', 'CS019'),
+('18CS43', 'CS033'),
+('18CS44', 'CS0033'),
+('18CS45', 'CS034'),
+('18CSL47', 'CS024'),
+('18CSL47', 'CS0033'),
+('18CSL48', 'CS019'),
+('18CSL48', 'CS035'),
+('18CS45', 'CS012'),
+('18CSL48', 'CS012');
 
 -- --------------------------------------------------------
 
@@ -74,6 +113,27 @@ CREATE TABLE `teacherallo` (
   `Section` varchar(1) NOT NULL,
   `Batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `teacherallo`
+--
+
+INSERT INTO `teacherallo` (`TeachID`, `SubID`, `Department`, `Sem`, `Section`, `Batch`) VALUES
+('CS024', '18CS42', 'CSE', 4, 'A', 0),
+('CS001', '18CS43', 'CSE', 4, 'A', 0),
+('CS027', '18CS44', 'CSE', 4, 'A', 0),
+('CS028', '18CS45', 'CSE', 4, 'A', 0),
+('CS016', '18CSE461', 'CSE', 4, 'A', 0),
+('CS018', '18CSE462', 'CSE', 4, 'A', 0),
+('CS019', '18CSE463', 'CSE', 4, 'A', 0),
+('CS023', '18CSE464', 'CSE', 4, 'A', 0),
+('CS001', '18CSL47', 'CSE', 4, 'A', 1),
+('CS014', '18CSL47', 'CSE', 4, 'A', 2),
+('CS014', '18CSL47', 'CSE', 4, 'A', 3),
+('CS019', '18CSL48', 'CSE', 4, 'A', 1),
+('CS008', '18CSL48', 'CSE', 4, 'A', 2),
+('CS019', '18CSL48', 'CSE', 4, 'A', 3),
+('MAT009', '18MAT41', 'CSE', 4, 'A', 0);
 
 -- --------------------------------------------------------
 
@@ -92,7 +152,27 @@ CREATE TABLE `teachers` (
 --
 
 INSERT INTO `teachers` (`TeachName`, `TeachID`, `Department`) VALUES
-('Mamatha Bai G', 'CS001', 'CSE');
+('Mamatha Bai G', 'CS001', 'CSE'),
+('Deepthi Shetty', 'CS0033', 'CSE'),
+('Sujata Joshi', 'CS008', 'CSE'),
+('Vasanth', 'CS011', ''),
+('Ramyashree', 'CS012', 'CSE'),
+('Chaitra H V', 'CS014', 'CSE'),
+('Chethan D Chahwan', 'CS016', 'CSE'),
+('Uma R', 'CS018', 'CSE'),
+('Kavya B S', 'CS019', 'CSE'),
+('Shilpa', 'CS023', 'CSE'),
+('Ramya S', 'CS024', 'CSE'),
+('Asha H V', 'CS025', 'CSE'),
+('Mahadevi', 'CS027', 'CSE'),
+('Mohan', 'CS028', 'CSE'),
+('Bhuvaneshwari', 'CS029', 'CSE'),
+('Jagadevi', 'CS030', 'CSE'),
+('Pramod S', 'CS032', 'CSE'),
+('Supriya', 'CS033', 'CSE'),
+('Shobha', 'CS034', 'CSE'),
+('Vinay T R', 'CS035', 'CSE'),
+('Dr Chandrakala ', 'MAT009', 'Math');
 
 -- --------------------------------------------------------
 
