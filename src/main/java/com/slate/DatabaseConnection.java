@@ -11,7 +11,7 @@ public class DatabaseConnection {
     {
         // Initialize all the information regarding database
     	String dbURL = "jdbc:mysql://localhost:3306/";
-        String dbName = "slatedbs";
+        String dbName = "slatedbs2";
         String dbUsername = "root";
         String dbPassword = "";
         String dbDriver = "com.mysql.jdbc.Driver";
