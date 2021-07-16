@@ -23,7 +23,7 @@ public class TableGen extends HttpServlet{
 			res.setContentType("text/html");
 			Connection con= DatabaseConnection.initializeDatabase();
 			Statement statement=con.createStatement();
-			String sql ="select SubID, TeachID, Batch, SUBSTRING(SubID, 5, 1) "
+			String sql ="select SubID, TeachID, Batch "
 					+ "from teacherallo "
 					+ "where (Department='"+Dept+"'or Department='Math')and Sem="+Sem+" and (Section='B' "
 					+ " or SUBSTRING(SubID, 5, 1)='E')"; 

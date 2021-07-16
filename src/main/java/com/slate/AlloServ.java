@@ -4,12 +4,12 @@ package com.slate;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +21,7 @@ public class AlloServ extends HttpServlet{
 		
 		TeachAllo teachallo[ ]= new TeachAllo[200];
 		try {
-			
-			
+			PrintWriter out=res.getWriter();
 			String Dept=(String) req.getSession().getAttribute("Dept");
 			String Sec=(String) req.getSession().getAttribute("Sec");
 			int Sem=(int) req.getSession().getAttribute("Sem");
@@ -33,7 +32,7 @@ public class AlloServ extends HttpServlet{
 			Statement statement=con.createStatement();
 			String sql ="select SubID "
 					+ "from subjects "
-					+ "where (Department='"+Dept+"'or Department='Math')and Semester="+Sem; 
+					+ "where (Department='"+Dept+"'or Department='Math')and Semester="+Sem+" and NOT (SUBSTRING(SubID, 5, 1)='E')"; 
 			
 			ResultSet resultSet=null;
 			resultSet= statement.executeQuery(sql);
@@ -52,22 +51,22 @@ public class AlloServ extends HttpServlet{
 	        	{
 	        		int j=1;
 	        		while(j<=3) {
-	        		TeachID=req.getParameter(SubID+Integer.toString(j));
-	        		batch=j;
-	        		teachallo[i+j-1]=new TeachAllo(TeachID, SubID.substring(0,7), Sem, Sec, Dept, batch);
-	        		j++;
+	        			TeachID=req.getParameter(SubID+Integer.toString(j));
+	        			batch=j;
+	        			teachallo[i+j-1]=new TeachAllo(TeachID, SubID.substring(0,7), Sem, Sec, Dept, batch);
+	        			j++;
+	        			out.println(SubID+" "+TeachID );
 	        		}	
 	        		i+=j-1;
 	        	}
-	        	
 	        	//where subject is theory
 	        	else {
 	        	TeachID=req.getParameter(SubID);
 	        	teachallo[i]=new TeachAllo(TeachID, SubID, Sem, Sec, Dept, batch);
 	        	i++;
+	        	out.println(SubID+" "+TeachID );
 	        	}
-	        	
-	        	
+	    
 	        }
 			
 			//storing the values in TeachAllocation table, NOTE:might be a good idea to make something which tells us if we have allocated teachers to a class or not
