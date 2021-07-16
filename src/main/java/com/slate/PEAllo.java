@@ -1,5 +1,7 @@
 package com.slate;
 
+//checking if electives and teachers assigned already or not and redirecting acordingly
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -20,10 +22,10 @@ public class PEAllo extends HttpServlet{
 		PrintWriter out= res.getWriter();
 	
 		try {
-				int pkey=0, tkey=0; //loop variable to see how much data we are extracting
+				int pkey=0, tkey=0; 
 				
 				
-				//fetching parameters from form
+				//fetching Department, sem, sec
 				String Dept=req.getParameter("Dept");
 				int Sem=Integer.parseInt(req.getParameter("Sem"));
 				String Sec=req.getParameter("Sec");
@@ -32,44 +34,60 @@ public class PEAllo extends HttpServlet{
 				Connection con= DatabaseConnection.initializeDatabase(); //static method to connect database
 				
 				
+				//checking if teachers are already alloted to this Dept+Sem+Sec
 				Statement statement=con.createStatement();
 				String sql ="select TeachersAllo, PEAllo "
 						+ "from classallo "
-						+ "where Department='"+Dept+"' and Semester="+Sem;
+						+ "where Department='"+Dept+"' and Semester="+Sem+" and Section='"+Sec+"'";
 		        ResultSet resultSet=null;
 				resultSet= statement.executeQuery(sql);
-				if(resultSet.next()!=false) {
 					while(resultSet.next()){
-						pkey=resultSet.getInt("PEAllo");
-						if(pkey==1)
-							break;
+						tkey=resultSet.getInt("TeachersAllo");
+						System.out.println(tkey);
+							if(tkey==1)
+								break;
 						
 					}
+					
+				//checking if electives are already alloted to this Dept+Sem
+				sql ="select TeachersAllo, PEAllo "
+						+ "from classallo "
+						+ "where Department='"+Dept+"' and Semester="+Sem;
+			    resultSet=null;
+				resultSet= statement.executeQuery(sql);
+				while(resultSet.next()){
+					pkey=resultSet.getInt("PEAllo");
+					System.out.println(pkey);
+					if(pkey==1)
+						break;	
 				}
-				else {
-					pkey=0;
-				}
+				
+				
 				sql ="select TeachersAllo, PEAllo"
 						+ " from classallo "
 						+ " where Department='"+Dept+"' and Semester="+Sem+" and Section='"+Sec+"' ";
 		        resultSet=null;
 				resultSet= statement.executeQuery(sql);
 				
-				if(resultSet.next()==false)
+				if(resultSet.next()==false)// if no results fetched, insert into table
 				{
 					PreparedStatement ps=con.prepareStatement("insert into classallo values(?,?,?,?,?)");
 		  	        ps.setString(1,Dept);
 		  	        ps.setInt(2,Sem);
 		  	        ps.setString(3,Sec);
-		  	        ps.setInt(4,0);
+		  	        ps.setInt(4,0); //tkey 0 because the section has not had any past assignments
 		  	        ps.setInt(5,pkey);
 		  	        int k=ps.executeUpdate();
 				}
+				
+				//fetching tkey from the table if it exists
 				else {
 					while(resultSet.next()){
 						tkey=resultSet.getInt("TeachersAllo");
 					}
 				}
+				
+				//setting session attributes to fetch in other servlets
 				req.getSession().setAttribute("Sec", Sec);
 				req.getSession().setAttribute("Sem", Sem);
 				req.getSession().setAttribute("Dept", Dept);

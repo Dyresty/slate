@@ -1,5 +1,6 @@
 package com.slate;
 
+//generates PE selection form, redirects to something if PE are already assigned for the department
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,6 +26,8 @@ public class PEForm extends HttpServlet{
 			String Sec=(String) req.getSession().getAttribute("Sec");
 			int Sem=(int) req.getSession().getAttribute("Sem");
 			int pkey=(int) req.getSession().getAttribute("pkey");
+			
+			//if pkey is 0, which means we need to assign electives, so we generate a form for it
 			if(pkey==0) {
 				Connection con= DatabaseConnection.initializeDatabase(); 
 				String sql ="select t.TeachName, t.TeachID, s.SubName, s.SubID, s.HoursPerWeek "
@@ -53,6 +56,11 @@ public class PEForm extends HttpServlet{
 				}
 				out.println("<input type='submit'>");
 				out.println("</form>");
+			}
+			
+			//if pkey is 1, we are just redirecting it to next servlet.
+			else {
+				res.sendRedirect(req.getContextPath() + "/something");
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

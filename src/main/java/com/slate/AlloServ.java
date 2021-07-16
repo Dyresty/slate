@@ -1,8 +1,6 @@
 package com.slate;
 
-
-
-
+//servlet to insert values into the teacherallo table
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -81,7 +79,15 @@ public class AlloServ extends HttpServlet{
 		  	    	ps.setInt(6,teachallo[j].Batch);
 		  	    	int k=ps.executeUpdate();
 		  	    	j++;
-        	}  
+        	}
+			
+			PreparedStatement ps=con.prepareStatement("Update classallo "
+					+ "set TeachersAllo=1 "
+					+ "where Department='"+Dept+"' and Section='"+Sec+"'"); 
+			int k=ps.executeUpdate();
+			
+			resultSet=null;
+			resultSet= statement.executeQuery(sql);
 			  res.sendRedirect(req.getContextPath() + "/TableGen");
 		}catch(Exception e) {
 			e.printStackTrace();

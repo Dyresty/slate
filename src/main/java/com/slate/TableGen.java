@@ -1,4 +1,5 @@
 package com.slate;
+//under construction. supposed to use all the data gathered to generate a form, probably gonna have another servlet to show table after this.
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;

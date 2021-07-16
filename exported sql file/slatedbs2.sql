@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2021 at 09:28 PM
+-- Generation Time: Jul 17, 2021 at 01:42 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `slatedbs2`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `classallo`
+--
+
+CREATE TABLE `classallo` (
+  `Department` varchar(4) NOT NULL,
+  `Semester` int(11) NOT NULL,
+  `Section` varchar(1) NOT NULL,
+  `TeachersAllo` tinyint(1) NOT NULL DEFAULT 0,
+  `PEAllo` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `classallo`
+--
+
+INSERT INTO `classallo` (`Department`, `Semester`, `Section`, `TeachersAllo`, `PEAllo`) VALUES
+('CSE', 4, 'A', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -113,27 +134,6 @@ CREATE TABLE `teacherallo` (
   `Section` varchar(1) NOT NULL,
   `Batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `teacherallo`
---
-
-INSERT INTO `teacherallo` (`TeachID`, `SubID`, `Department`, `Sem`, `Section`, `Batch`) VALUES
-('CS024', '18CS42', 'CSE', 4, 'A', 0),
-('CS001', '18CS43', 'CSE', 4, 'A', 0),
-('CS027', '18CS44', 'CSE', 4, 'A', 0),
-('CS028', '18CS45', 'CSE', 4, 'A', 0),
-('CS016', '18CSE461', 'CSE', 4, 'A', 0),
-('CS018', '18CSE462', 'CSE', 4, 'A', 0),
-('CS019', '18CSE463', 'CSE', 4, 'A', 0),
-('CS023', '18CSE464', 'CSE', 4, 'A', 0),
-('CS001', '18CSL47', 'CSE', 4, 'A', 1),
-('CS014', '18CSL47', 'CSE', 4, 'A', 2),
-('CS014', '18CSL47', 'CSE', 4, 'A', 3),
-('CS019', '18CSL48', 'CSE', 4, 'A', 1),
-('CS008', '18CSL48', 'CSE', 4, 'A', 2),
-('CS019', '18CSL48', 'CSE', 4, 'A', 3),
-('MAT009', '18MAT41', 'CSE', 4, 'A', 0);
 
 -- --------------------------------------------------------
 
