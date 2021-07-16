@@ -19,7 +19,7 @@ public class something extends HttpServlet{
 public void service(HttpServletRequest req,HttpServletResponse res)  
 throws ServletException,IOException  
 {  
-	TeachShow teachshow[ ]= new TeachShow[100];
+	TeachShow teachshow[ ]= new TeachShow[200];
 	
 	PrintWriter out= res.getWriter();
 	
@@ -120,20 +120,6 @@ throws ServletException,IOException
 	        req.getSession().setAttribute("Dept", Dept);
 	        getServletContext().getRequestDispatcher("/Allo");
 	        
-	        //this code is not for this servlet, it is just a reference for the allocation servlet.
-//	        int j=0;
-//	        while(j<i) {
-//	        	PreparedStatement ps=con.prepareStatement("insert into teacherallo values(?, ?, ?, ?, ?, ?)");
-//	  	       //setting values to the said statement
-//	  	        ps.setString(1,teachshow[j].TeachID);
-//	  	    	ps.setString(2,teachshow[j].SubID);
-//	  	    	ps.setString(3,Dept);
-//	  	    	ps.setString(4,Integer.toString(Sem));
-//	  	    	ps.setString(5,Sec);
-//	  	    	ps.setString(6,Integer.toString(0));
-//	  	    	int k=ps.executeUpdate();
-//	  	    	j++;
-//	        }
 
 	}
 	catch(Exception e) {
