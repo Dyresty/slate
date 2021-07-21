@@ -30,7 +30,6 @@ public class PEAllo extends HttpServlet{
 				int Sem=Integer.parseInt(req.getParameter("Sem"));
 				String Sec=req.getParameter("Sec");
 				res.setContentType("text/html");
-				out.println(Sem+" "+Dept+" "+Sec);
 				Connection con= DatabaseConnection.initializeDatabase(); //static method to connect database
 				
 				
@@ -71,12 +70,14 @@ public class PEAllo extends HttpServlet{
 				
 				if(resultSet.next()==false)// if no results fetched, insert into table
 				{
-					PreparedStatement ps=con.prepareStatement("insert into classallo values(?,?,?,?,?)");
+					PreparedStatement ps=con.prepareStatement("insert into classallo values(?,?,?,?,?,?,?)");
 		  	        ps.setString(1,Dept);
 		  	        ps.setInt(2,Sem);
 		  	        ps.setString(3,Sec);
 		  	        ps.setInt(4,0); //tkey 0 because the section has not had any past assignments
 		  	        ps.setInt(5,pkey);
+		  	        ps.setInt(6, 0);
+		  	        ps.setInt(7, 0);
 		  	        int k=ps.executeUpdate();
 				}
 				

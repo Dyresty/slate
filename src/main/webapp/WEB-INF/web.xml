@@ -42,4 +42,21 @@
   	<servlet-name>PEAllo</servlet-name>
  	 <url-pattern>/PEAllo</url-pattern>
   </servlet-mapping>
+     <servlet>
+  		<servlet-name>TableShow</servlet-name>
+  		<servlet-class>com.slate.TableShow</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>TableShow</servlet-name>
+ 	 <url-pattern>/TableShow</url-pattern>
+  </servlet-mapping>
+  
+     <servlet>
+  		<servlet-name>Login</servlet-name>
+  		<servlet-class>com.slate.Login</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Login</servlet-name>
+ 	 <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
 </web-app>
