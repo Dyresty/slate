@@ -129,9 +129,13 @@ public class something extends HttpServlet{
 						+ "    <img src=\"img/header logo.jpg\" alt=\"\" style=\"width:100%;\">\r\n"
 						+ "  </div>\r\n"
 						+ "  <div class=\"\" style='text-align:center;background-image: linear-gradient(180deg, #bac1c5, #2e4052);'>\r\n"
-						+ "<div class=\"radios\" style=\"background-color:#bac1c5; display:inline-block;text-align:center; width:1200px;top:100px;position:relative;border-radius:15px;\">"
+						+ "<br>"
+						+ "<br>"
+						+ "<br>"
+						+ "<br>"
+						+ "<div class=\"radios\" style=\"background-color:#bac1c5; display:inline-block;text-align:center; width:1200px;;position:relative;border-radius:15px;\">"
 						+ "<h2>Assign Program Elective Teachers:</h2>"
-						+ "<div>");
+						+ "<div style=''>");
 				
 				
 				//fetching parameters from form
@@ -226,7 +230,7 @@ public class something extends HttpServlet{
 			        	}
 			        	l++;
 			        }
-			        out.println("<br><input type='submit'>");
+			        out.println("<br><input type='submit' class='btn btn-primary'>");
 					out.println("</form> </div> </div></div> </body> <html>");
 			        
 			        

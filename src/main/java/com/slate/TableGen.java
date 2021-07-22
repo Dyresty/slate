@@ -19,7 +19,7 @@ public class TableGen extends HttpServlet
 	SubTeachVal subTv[]=new SubTeachVal[30];
 	SubHoursVal subHours[]=new SubHoursVal[20];
 	RelTableVal relVals[]= new RelTableVal[500];
-	
+	int PK;
 	
 	public void service(HttpServletRequest req,HttpServletResponse res)  
 			throws ServletException,IOException{
@@ -83,6 +83,15 @@ public class TableGen extends HttpServlet
 				out.println(TableK);
 			}
 			
+			statement=con.createStatement();
+			sql ="select PEAssign "
+					+ "from classallo   "
+					+ "where Semester='"+Sem+"' and Department='"+Dept+"' ";
+			resultSet=statement.executeQuery(sql);
+			while(resultSet.next()){
+				PK=resultSet.getInt("PEAssign");
+				out.println(TableK);
+			}
 			
 			out.println(TableK);
 			if(TableK==0) {
@@ -107,7 +116,7 @@ public class TableGen extends HttpServlet
 					
 					
 					statement=con.createStatement();
-					sql ="select TeachID, Hour, Day, Section "
+					sql ="select TeachID, Hour, Day, Section, Batch "
 							+ "from timeslots "
 							+ "ORDER BY Day, Hour"; 
 					resultSet=statement.executeQuery(sql);
@@ -117,7 +126,8 @@ public class TableGen extends HttpServlet
 						int Hour=resultSet.getInt("Hour");
 						int Day=resultSet.getInt("Day");
 						String Sect=resultSet.getString("Section");
-						relVals[nRel]= new RelTableVal(TeachID, Day, Hour, Sect);
+						int batch=resultSet.getInt("Batch");
+						relVals[nRel]= new RelTableVal(TeachID, Day, Hour, Sect, batch);
 						nRel++;
 						
 					}
@@ -144,7 +154,7 @@ public class TableGen extends HttpServlet
 					if(PEkey==1) {
 						for(int x=0;x<nRel;x++)
 						{
-							if(relVals[x].Sec.equals("Z"))
+							if(relVals[x].batch==-1)
 							{
 								tableVal[relVals[x].day][relVals[x].hour].SubID="18CSE46";
 								tableVal[relVals[x].day][relVals[x].hour].flag=1;
@@ -419,6 +429,7 @@ public class TableGen extends HttpServlet
 		{
 			if(relVals[k].day==i&&relVals[k].hour==j&&relVals[k].TeachID.equals(TeachID))
 				key=0;
+			
 		}
 		return key;
 	}
@@ -436,29 +447,41 @@ public class TableGen extends HttpServlet
 					{
 						if(tableVal[i][j].SubID.equals(subTv[k].SubID))
 						{
-							System.out.println(tableVal[i][j].SubID+" "+subTv[k].SubID);
 							if(tableVal[i][j].SubID.substring(4, 5).equals("L")) {
 								batch++;
 							}
 							PreparedStatement ps=con.prepareStatement("insert into timeslots values(?,?,?,?,?, ?, ?, ?)");
 								String TeachID=subTv[k].TeachID;
-								ps.setString(1,TeachID);
-						
-								ps.setString(2,tableVal[i][j].SubID);
-								ps.setInt(3,j);
-								ps.setInt(4,i); 
-								ps.setString(5,Dept);
-								ps.setInt(6,Sem);
-								if(tableVal[i][j].SubID.substring(4, 5).equals("E"))
-								{
-									ps.setString(7,"Z");
-									ps.setInt(8,-1);
-								}
-								else {
-									ps.setString(7,Sec);
-									ps.setInt(8,batch);
-								}
-								int y=ps.executeUpdate();
+									if((tableVal[i][j].SubID.substring(4, 5).equals("E")&&PK==0)){
+									ps.setString(1,TeachID);
+									ps.setString(2,tableVal[i][j].SubID);
+									ps.setInt(3,j);
+									ps.setInt(4,i); 
+									ps.setString(5,Dept);
+									ps.setInt(6,Sem);
+									if(tableVal[i][j].SubID.substring(4, 5).equals("E"))
+									{
+										ps.setString(7,Sec);
+										ps.setInt(8,-1);
+									}
+									else {
+										ps.setString(7,Sec);
+										ps.setInt(8,batch);
+									}
+									}
+									else {
+										ps.setString(1,TeachID);
+										ps.setString(2,tableVal[i][j].SubID);
+										ps.setInt(3,j);
+										ps.setInt(4,i); 
+										ps.setString(5,Dept);
+										ps.setInt(6,Sem);
+										
+											ps.setString(7,Sec);
+											ps.setInt(8,batch);
+									}
+									int y=ps.executeUpdate();
+								
 						}
 					}
 					
