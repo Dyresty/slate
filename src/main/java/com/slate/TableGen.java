@@ -172,17 +172,19 @@ public class TableGen extends HttpServlet
 				{
 					for(j=0;j<4;j++) 
 					{
+						//checking if the timeslot is available 
 						if(tableVal[i][j].flag==0) {
+							//setting variation condition
 							if(i%2==0) {
+								//k and l to transverse through teachers array and subjects array respectively
 								int k=0;
 								int l=0;
-								int key=1;
-								int lab=0;
+								int key=1; //key 1, becomes 0 whenever a condition doesn't match
 								while(true)
 								{
-									int key1=0;
+									int key1=0;//another key to keep track of nested conditions
 									
-									if(k==m)
+									if(k==m) //condition to end loop
 									{
 										if(key==1&&subHours[l].hoursPW>0)
 										{
@@ -193,11 +195,13 @@ public class TableGen extends HttpServlet
 										}
 										break;
 									}
+									//condition to increment the subject array, if subhours subID!=subtable SubID
 									if(!subTv[k].SubID.equals(subHours[l].SubID))
 									{
 										
 										if(key==1&&subHours[l].hoursPW>0)
 										{
+											//Condition to allocate labs, putting 2 consecutive values and incrementing j once more
 											if(subHours[l].SubID.substring(4, 5).equals("L")) 
 											{
 												tableVal[i][j].SubID=subHours[l].SubID;
@@ -208,6 +212,8 @@ public class TableGen extends HttpServlet
 												subHours[l].hoursPW--;
 												j++;
 											}
+											
+											//normal theory subject allocation
 											else
 											{
 												tableVal[i][j].SubID=subHours[l].SubID;
@@ -217,10 +223,13 @@ public class TableGen extends HttpServlet
 											break;
 										}
 										l++;
-										key=1;
+										key=1; //resetting key to 1 after the subject switching takes place.
 									}
+									
+									//checking lab condition
 									if(subHours[l].SubID.substring(4, 5).equals("L"))
 									{
+										//if class is in 1st, 3rd, 5th hour check for both jth and j+1th class
 										if(j%2==0)
 										{
 											key1=checkA(subTv[k].SubID, subTv[k].TeachID, i, j, nRel);
@@ -230,19 +239,23 @@ public class TableGen extends HttpServlet
 											if(key1==0)
 												key=0;
 										}
+										//if timeslot isn't in the said timings, lab cannot be alloted
 										else
 											key=0;
 									}
+									
+									//non lab conditions
 									else 
 									{
 										key1=checkA(subTv[k].SubID, subTv[k].TeachID, i, j, nRel);
 										if(key1==0)
 											key=0;
 									}
-									k++;
+									k++; //incrementing through teachers array
 								}
 							}
-								else {
+							//same code as before, except we are transversing through teachers and subject tables from n-1 to 0 instead of 0 to n-1
+								else { 
 									int k=m-1;
 									int l=n-1;
 									int key=1;

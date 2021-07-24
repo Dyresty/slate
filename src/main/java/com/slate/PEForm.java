@@ -142,7 +142,7 @@ public class PEForm extends HttpServlet{
 				resultSet= statement.executeQuery(sql);
 				String Sub="null";
 				//setting results of query inside our array of objects
-				out.println("<form action='./something'>");
+				out.println("<form action='./TForm'>");
 				while(resultSet.next()){
 					String SubName=resultSet.getString("SubName");
 					String temp=resultSet.getString("SubID");

@@ -151,22 +151,25 @@ public class TableShow extends HttpServlet{
 				{
 					if(j==2||j==4)
 						out.println("<td><pre> \t </td>");
-					out.println("<td class=\"table-light\">");
+					if(i==5&&j>3)
+					{
+						out.println("<td style='background-color:#e8e8e8;color:black;text-align:center;'>- - -</td>");
+					}
+					else
+						out.println("<td class=\"table-light\">");
 //					for(int k=0;k<tableVal[i][j].length-1;k++)
 					{	if(tableVal[i][j][0]!=null)
 						{
 							out.println(tableVal[i][j][0].SubName+"<br>");
 							System.out.println(tableVal[i][j][0].SubID+" "+i+" l"+j);
+							out.println("</td>");
 						}
-						else
-						{
-							out.println("<pre> \t <br>");
-						}
+					
 					}
-					out.println("</td>");
 				}
 				out.println("</tr>");
 			}
+			
 			out.println("</div> </div></tbody></table>");
 			
 
@@ -214,3 +217,5 @@ public class TableShow extends HttpServlet{
 		}
 	}
 }
+
+//denim divas and a blue dot
