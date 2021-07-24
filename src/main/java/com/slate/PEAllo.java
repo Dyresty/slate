@@ -94,7 +94,10 @@ public class PEAllo extends HttpServlet{
 				req.getSession().setAttribute("Dept", Dept);
 				req.getSession().setAttribute("tkey", tkey);
 				req.getSession().setAttribute("pkey", pkey);
-				res.sendRedirect(req.getContextPath() + "/PEForm");
+				if(pkey==0)
+					res.sendRedirect(req.getContextPath() + "/PEForm");
+				else
+					res.sendRedirect(req.getContextPath() + "/TForm");
 
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -416,21 +416,28 @@ public class TableGen extends HttpServlet
 	}
 	
 	
-	
+	// function to check if the timeslot is available to be alloted
 	public int checkA(String SubID, String TeachID, int i, int j, int nRel) 
 	{
 		int key=1;
+		
+		//checks if subject is being repeated in the same day
 		for(int k=j-1;k>=0;k--)
 		{
 			if(tableVal[i][k].SubID.equals(SubID))
 				key=0;
 		}
+		
+		//checks all the relational values obtained from timeslot dbs
+		//checks if the teacher is busy during those hours teaching some other class
 		for(int k=0;k<nRel;k++)
 		{
 			if(relVals[k].day==i&&relVals[k].hour==j&&relVals[k].TeachID.equals(TeachID))
 				key=0;
 			
 		}
+		
+		//returns 1 if timeslot is available to be allocated, 0 otherwise
 		return key;
 	}
 	

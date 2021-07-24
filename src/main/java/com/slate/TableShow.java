@@ -41,6 +41,11 @@ public class TableShow extends HttpServlet{
 					+ "        <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0\" crossorigin=\"anonymous\">\r\n"
 					+ "        <link rel=\"stylesheet\" href=\"css/display.css\">\r\n"
 					+ "\r\n"
+					+ "<style>"
+					+ "td:hover{"
+					+ "color:white;"
+					+ "}"
+					+ "</style>"
 					+ "</head>\r\n"
 					+ "\r\n"
 					+ "<body style=\"background-color:teal;\">\r\n"
@@ -72,14 +77,14 @@ public class TableShow extends HttpServlet{
 					+ "                                <thead class=>\r\n"
 					+ "                                        <tr>\r\n"
 					+ "                                                <th scope=\"col\" class=\"bg-dark\">Day/Hour</th>\r\n"
-					+ "                                                <th scope=\"col\">1</th>\r\n"
-					+ "                                                <th scope=\"col\">2</th>\r\n"
-					+ "                                                <th scope=\"col\">Short break</th>\r\n"
-					+ "                                                <th scope=\"col\">3</th>\r\n"
-					+ "                                                <th scope=\"col\">4</th>\r\n"
-					+ "                                                <th scope=\"col\">Lunch</th>\r\n"
-					+ "                                                <th scope=\"col\">5</th>\r\n"
-					+ "                                                <th scope=\"col\">6</th>\r\n"
+					+ "                                                <th scope=\"col\" style='text-align:center;'>1</th>\r\n"
+					+ "                                                <th scope=\"col\"  style='text-align:center;'>2</th>\r\n"
+					+ "                                                <th scope=\"col\"  style='text-align:center;'>Short break</th>\r\n"
+					+ "                                                <th scope=\"col\"  style='text-align:center;'>3</th>\r\n"
+					+ "                                                <th scope=\"col\"  style='text-align:center;'>4</th>\r\n"
+					+ "                                                <th scope=\"col\"  style='text-align:center;'>Lunch</th>\r\n"
+					+ "                                                <th scope=\"col\"  style='text-align:center;'>5</th>\r\n"
+					+ "                                                <th scope=\"col\"  style='text-align:center;'>6</th>\r\n"
 					+ "                                        </tr>\r\n"
 					+ "                                </thead>\r\n"
 					+ "                                <tbody>");
@@ -145,13 +150,17 @@ public class TableShow extends HttpServlet{
 				for(int j=0;j<tableVal[i].length;j++)
 				{
 					if(j==2||j==4)
-						out.println("<td></td>");
+						out.println("<td><pre> \t </td>");
 					out.println("<td class=\"table-light\">");
 //					for(int k=0;k<tableVal[i][j].length-1;k++)
 					{	if(tableVal[i][j][0]!=null)
 						{
 							out.println(tableVal[i][j][0].SubName+"<br>");
 							System.out.println(tableVal[i][j][0].SubID+" "+i+" l"+j);
+						}
+						else
+						{
+							out.println("<pre> \t <br>");
 						}
 					}
 					out.println("</td>");

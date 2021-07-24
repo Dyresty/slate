@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 //@WebServlet("/form")
-public class something extends HttpServlet{  
+public class TForm extends HttpServlet{  
 	TeachShow teachshow[ ]= new TeachShow[200];
 	TeachAllo teachallo[ ]= new TeachAllo[200];
 	
@@ -134,7 +134,7 @@ public class something extends HttpServlet{
 						+ "<br>"
 						+ "<br>"
 						+ "<div class=\"radios\" style=\"background-color:#bac1c5; display:inline-block;text-align:center; width:1200px;;position:relative;border-radius:15px;\">"
-						+ "<h2>Assign Program Elective Teachers:</h2>"
+						+ "<h2>Assign Teachers:</h2>"
 						+ "<div style=''>");
 				
 				

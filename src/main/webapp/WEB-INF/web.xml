@@ -11,11 +11,11 @@
   </servlet-mapping>
    <servlet>
   		<servlet-name>something</servlet-name>
-  		<servlet-class>com.slate.something</servlet-class>
+  		<servlet-class>com.slate.TForm</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>something</servlet-name>
- 	 <url-pattern>/something</url-pattern>
+ 	 <url-pattern>/TForm</url-pattern>
   </servlet-mapping>
     <servlet>
   		<servlet-name>Allo</servlet-name>

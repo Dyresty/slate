@@ -162,7 +162,7 @@ public class PEForm extends HttpServlet{
 			
 			//if pkey is 1, we are just redirecting it to next servlet.
 			else {
-				res.sendRedirect(req.getContextPath() + "/something");
+				res.sendRedirect(req.getContextPath() + "/TForm");
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
